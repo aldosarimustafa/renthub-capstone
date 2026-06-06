@@ -685,6 +685,70 @@ As an administrator, I want to monitor platform activity so that system integrit
 
 ## 8. Acceptance Criteria
 
+### **AC-1 User Registration**
+
+* Users can create an account using a unique email address.
+* Duplicate email registrations are prevented.
+* Registration information is validated before account creation.
+
+---
+
+### **AC-2 User Authentication**
+
+* Registered users can log in using valid credentials.
+* Invalid login attempts are rejected.
+* Authenticated users receive access based on their assigned role.
+
+---
+
+### **AC-3 Property Management**
+
+* Property managers can create property listings.
+* Property managers can edit existing property listings.
+* Property managers can delete property listings.
+* Property information is displayed correctly to tenants.
+
+---
+
+### **AC-4 Rental Applications**
+
+* Tenants can submit applications for available properties.
+* Property managers can review submitted applications.
+* Applications can be approved or rejected.
+
+---
+
+### **AC-5 Lease Management**
+
+* Property managers can create lease records.
+* Lease information is stored successfully.
+* Tenants can view their lease details.
+
+---
+
+### **AC-6 Payment Management**
+
+* Payment records can be created and updated.
+* Payment history is maintained accurately.
+* Property managers can view payment records.
+
+---
+
+### **AC-7 Maintenance Requests**
+
+* Tenants can submit maintenance requests.
+* Property managers can update request statuses.
+* Request history is maintained.
+
+---
+
+### **AC-8 Reporting**
+
+* Reports can be generated successfully.
+* Report information is accurate and current.
+* Reports are accessible to authorized users only.
+
+
 ---
 
 ## 9. System Requirements
