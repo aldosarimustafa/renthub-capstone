@@ -404,19 +404,195 @@ An administrator is responsible for managing the overall platform.
 
 ## 6. Use Cases
 
-### UC-1 Register Account
+### **UC-1 Register Account**
 
-### UC-2 Login
+**Actor:** Tenant, Property Manager
 
-### UC-3 Browse Properties
+**Description:**
+A new user creates an account in the system.
 
-### UC-4 Submit Application
+**Preconditions:**
 
-### UC-5 Create Lease
+* User is not registered.
 
-### UC-6 Record Payment
+**Main Flow:**
 
-### UC-7 Submit Maintenance Request
+1. User opens registration page.
+2. User enters registration information.
+3. User submits registration form.
+4. System validates information.
+5. System creates account.
+6. User receives confirmation.
+
+**Postconditions:**
+
+* User account is successfully created.
+
+---
+
+### **UC-2 Login**
+
+**Actor:** Tenant, Property Manager, Administrator
+
+**Description:**
+A registered user logs into the platform.
+
+**Preconditions:**
+
+* User account exists.
+
+**Main Flow:**
+
+1. User enters email and password.
+2. System validates credentials.
+3. System authenticates user.
+4. User is redirected to dashboard.
+
+**Postconditions:**
+
+* User gains access to authorized features.
+
+---
+
+### **UC-3 Browse Properties**
+
+**Actor:** Tenant
+
+**Description:**
+A tenant views available rental properties.
+
+**Preconditions:**
+
+* Properties exist in the system.
+
+**Main Flow:**
+
+1. Tenant opens property listings page.
+2. System displays available properties.
+3. Tenant views property details.
+
+**Postconditions:**
+
+* Property information is displayed.
+
+---
+
+### **UC-4 Submit Rental Application**
+
+**Actor:** Tenant
+
+**Description:**
+A tenant submits an application for a property.
+
+**Preconditions:**
+
+* Tenant is logged in.
+* Property is available.
+
+**Main Flow:**
+
+1. Tenant selects a property.
+2. Tenant completes application form.
+3. Tenant submits application.
+4. System records application.
+
+**Postconditions:**
+
+* Application is stored for review.
+
+---
+
+### **UC-5 Manage Property**
+
+**Actor:** Property Manager
+
+**Description:**
+A manager creates, edits, or deletes property listings.
+
+**Preconditions:**
+
+* Manager is authenticated.
+
+**Main Flow:**
+
+1. Manager accesses property management page.
+2. Manager performs property operations.
+3. System updates database.
+
+**Postconditions:**
+
+* Property information is updated.
+
+---
+
+### **UC-6 Manage Lease**
+
+**Actor:** Property Manager
+
+**Description:**
+A manager creates and updates lease records.
+
+**Preconditions:**
+
+* Approved tenant application exists.
+
+**Main Flow:**
+
+1. Manager creates lease.
+2. Lease details are entered.
+3. System stores lease information.
+
+**Postconditions:**
+
+* Lease record is created.
+
+---
+
+### **UC-7 Record Payment**
+
+**Actor:** Property Manager
+
+**Description:**
+A manager records rent payments.
+
+**Preconditions:**
+
+* Active lease exists.
+
+**Main Flow:**
+
+1. Manager selects tenant.
+2. Manager records payment.
+3. System updates payment history.
+
+**Postconditions:**
+
+* Payment record is stored.
+
+---
+
+### **UC-8 Submit Maintenance Request**
+
+**Actor:** Tenant
+
+**Description:**
+A tenant submits a maintenance request.
+
+**Preconditions:**
+
+* Tenant is logged in.
+
+**Main Flow:**
+
+1. Tenant opens maintenance form.
+2. Tenant enters request details.
+3. Tenant submits request.
+4. System stores request.
+
+**Postconditions:**
+
+* Maintenance request is available for review.
+
 
 ---
 
