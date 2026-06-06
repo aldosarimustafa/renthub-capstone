@@ -598,6 +598,89 @@ A tenant submits a maintenance request.
 
 ## 7. User Stories
 
+### **US-1 Tenant Registration**
+
+As a tenant, I want to create an account so that I can apply for rental properties.
+
+---
+
+### **US-2 Tenant Login**
+
+As a tenant, I want to log into the system so that I can access my applications, leases, and maintenance requests.
+
+---
+
+### **US-3 Browse Properties**
+
+As a tenant, I want to browse available properties so that I can find a suitable rental unit.
+
+---
+
+### **US-4 Submit Application**
+
+As a tenant, I want to submit a rental application so that I can request to rent a property.
+
+---
+
+### **US-5 View Lease Information**
+
+As a tenant, I want to view my lease details so that I can understand my rental agreement.
+
+---
+
+### **US-6 Submit Maintenance Request**
+
+As a tenant, I want to report maintenance issues so that repairs can be performed.
+
+---
+
+### **US-7 Manage Properties**
+
+As a property manager, I want to create and update property listings so that available properties can be advertised.
+
+---
+
+### **US-8 Review Applications**
+
+As a property manager, I want to review rental applications so that I can select qualified tenants.
+
+---
+
+### **US-9 Manage Leases**
+
+As a property manager, I want to create and manage lease records so that tenant agreements are properly documented.
+
+---
+
+### **US-10 Record Payments**
+
+As a property manager, I want to record rent payments so that payment history can be tracked.
+
+---
+
+### **US-11 Manage Maintenance Requests**
+
+As a property manager, I want to update maintenance requests so that repair progress can be monitored.
+
+---
+
+### **US-12 Generate Reports**
+
+As a property manager, I want to generate reports so that I can analyze property performance and rental activity.
+
+---
+
+### **US-13 Manage Users**
+
+As an administrator, I want to manage user accounts so that platform access can be controlled.
+
+---
+
+### **US-14 Monitor System Activity**
+
+As an administrator, I want to monitor platform activity so that system integrity is maintained.
+
+
 ---
 
 ## 8. Acceptance Criteria
