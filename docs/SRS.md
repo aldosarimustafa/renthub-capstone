@@ -329,11 +329,76 @@ The user interface shall adapt to different screen sizes and resolutions.
 
 ## 5. User Roles
 
-### Tenant
+### 5.1 Tenant
 
-### Property Manager
+A tenant is a registered user who is interested in renting a property.
 
-### Administrator
+#### Responsibilities
+
+* Browse available properties
+* View property details
+* Submit rental applications
+* View lease information
+* Track payment history
+* Submit maintenance requests
+* Update personal profile information
+
+#### Permissions
+
+* Read available property listings
+* Create rental applications
+* View personal lease records
+* Create maintenance requests
+* View personal payment records
+
+---
+
+### 5.2 Property Manager
+
+A property manager is responsible for managing rental properties and tenant activities.
+
+#### Responsibilities
+
+* Create and manage property listings
+* Review rental applications
+* Approve or reject applications
+* Manage lease agreements
+* Track rent payments
+* Manage maintenance requests
+* Generate operational reports
+
+#### Permissions
+
+* Create properties
+* Edit properties
+* Delete properties
+* Manage applications
+* Manage leases
+* View reports
+* Update maintenance request statuses
+
+---
+
+### 5.3 Administrator
+
+An administrator is responsible for managing the overall platform.
+
+#### Responsibilities
+
+* Manage user accounts
+* Monitor system activity
+* Manage permissions
+* Maintain system integrity
+* Resolve platform issues
+
+#### Permissions
+
+* Full system access
+* User account management
+* Role management
+* System monitoring
+* Data management
+
 
 ---
 
