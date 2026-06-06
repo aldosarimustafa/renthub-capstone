@@ -40,15 +40,95 @@ The platform aims to improve efficiency, reduce administrative workload, and pro
 
 ## 2. System Overview
 
-### 2.1 Product Perspective
+### 2.1 Product Perspective**
 
-### 2.2 Product Functions
+RentHub is a web-based property rental management platform designed to support tenants, property managers, and administrators. The system will operate as a full-stack web application consisting of a React frontend, a Node.js/Express backend, and a MongoDB database.
 
-### 2.3 User Classes
+The platform provides a centralized environment where users can manage rental properties, applications, leases, payments, and maintenance requests through a single system.
 
-### 2.4 Operating Environment
+---
 
-### 2.5 Assumptions and Dependencies
+### 2.2 Product Functions**
+
+The RentHub platform will provide the following core functions:
+
+* User registration and authentication
+* Role-based access control
+* Property listing management
+* Property search and viewing
+* Rental application submission
+* Application review and approval
+* Lease management
+* Rent payment tracking
+* Maintenance request management
+* Reporting and analytics
+
+These functions are intended to improve operational efficiency and streamline communication between tenants and property managers.
+
+---
+
+### 2.3 User Classes**
+
+The system supports three primary user groups:
+
+#### Tenant**
+
+Tenants can:
+
+* Browse available properties
+* Submit rental applications
+* View lease information
+* Track payment history
+* Submit maintenance requests
+
+#### Property Manager**
+
+Property managers can:
+
+* Create and manage property listings
+* Review tenant applications
+* Manage lease agreements
+* Record rent payments
+* Update maintenance requests
+* Generate reports
+
+#### Administrator**
+
+Administrators can:
+
+* Manage user accounts
+* Monitor platform activity
+* Control system permissions
+* Maintain system integrity
+
+---
+
+### 2.4 Operating Environment**
+
+RentHub will operate as a web-based application accessible through modern internet browsers such as Google Chrome, Microsoft Edge, Mozilla Firefox, and Safari.
+
+The development environment consists of:
+
+* React.js for frontend development
+* Node.js and Express.js for backend development
+* MongoDB for database management
+* Git and GitHub for version control
+* Visual Studio Code as the primary development environment
+
+---
+
+### 2.5 Assumptions and Dependencies**
+
+The development and operation of the system rely on the following assumptions:
+
+* Users have access to a stable internet connection.
+* Users possess basic computer literacy.
+* MongoDB services are available and operational.
+* Node.js runtime is installed on the deployment server.
+* Modern web browsers are used to access the system.
+
+The project depends on third-party technologies including React, Express, MongoDB, GitHub, and related development libraries.
+
 
 ---
 
