@@ -40,7 +40,7 @@ The platform aims to improve efficiency, reduce administrative workload, and pro
 
 ## 2. System Overview
 
-### 2.1 Product Perspective**
+### 2.1 Product Perspective
 
 RentHub is a web-based property rental management platform designed to support tenants, property managers, and administrators. The system will operate as a full-stack web application consisting of a React frontend, a Node.js/Express backend, and a MongoDB database.
 
@@ -48,7 +48,7 @@ The platform provides a centralized environment where users can manage rental pr
 
 ---
 
-### 2.2 Product Functions**
+### 2.2 Product Functions
 
 The RentHub platform will provide the following core functions:
 
@@ -67,11 +67,11 @@ These functions are intended to improve operational efficiency and streamline co
 
 ---
 
-### 2.3 User Classes**
+### 2.3 User Classes
 
 The system supports three primary user groups:
 
-#### Tenant**
+#### Tenant
 
 Tenants can:
 
@@ -81,7 +81,7 @@ Tenants can:
 * Track payment history
 * Submit maintenance requests
 
-#### Property Manager**
+#### Property Manager
 
 Property managers can:
 
@@ -92,7 +92,7 @@ Property managers can:
 * Update maintenance requests
 * Generate reports
 
-#### Administrator**
+#### Administrator
 
 Administrators can:
 
@@ -103,7 +103,7 @@ Administrators can:
 
 ---
 
-### 2.4 Operating Environment**
+### 2.4 Operating Environment
 
 RentHub will operate as a web-based application accessible through modern internet browsers such as Google Chrome, Microsoft Edge, Mozilla Firefox, and Safari.
 
@@ -117,7 +117,7 @@ The development environment consists of:
 
 ---
 
-### 2.5 Assumptions and Dependencies**
+### 2.5 Assumptions and Dependencies
 
 The development and operation of the system rely on the following assumptions:
 
