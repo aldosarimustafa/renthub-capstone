@@ -753,6 +753,120 @@ As an administrator, I want to monitor platform activity so that system integrit
 
 ## 9. System Requirements
 
-### Hardware Requirements
+### **9.1 Hardware Requirements**
 
-### Software Requirements
+The minimum hardware requirements for development and testing are:
+
+#### Development Machine
+
+* Processor: Intel Core i5 or equivalent
+* Memory: 8 GB RAM minimum
+* Storage: 20 GB available disk space
+* Internet connection
+
+#### Server Environment
+
+* Multi-core processor
+* 8 GB RAM or higher
+* SSD storage
+* Stable internet connectivity
+
+---
+
+### **9.2 Software Requirements**
+
+#### Development Software
+
+* Visual Studio Code
+* Git
+* GitHub
+* Node.js
+* npm
+* MongoDB
+* Postman
+* Web Browser
+
+---
+
+#### Frontend Technologies
+
+* React.js
+* React Router
+* Axios
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+
+---
+
+#### Backend Technologies
+
+* Node.js
+* Express.js
+* JWT Authentication
+* bcrypt
+* dotenv
+* cors
+
+---
+
+#### Database Technologies
+
+* MongoDB
+* Mongoose ODM
+
+---
+
+### **9.3 Browser Requirements**
+
+The application shall support:
+
+* Google Chrome
+* Mozilla Firefox
+* Microsoft Edge
+* Safari
+
+---
+
+### **9.4 Network Requirements**
+
+Users must have:
+
+* Internet access
+* Access to the application server
+* Access to the database server (administrators only)
+
+---
+
+### **9.5 Security Requirements**
+
+The system shall:
+
+* Encrypt passwords before storage
+* Use JWT-based authentication
+* Restrict access based on user roles
+* Validate user inputs
+* Protect sensitive information
+
+---
+
+### **9.6 Backup and Recovery Requirements**
+
+The system should support:
+
+* Regular database backups
+* Data recovery procedures
+* Protection against accidental data loss
+
+---
+
+### **9.7 Future Expansion Requirements**
+
+The architecture should support future additions including:
+
+* Online payment gateways
+* Mobile applications
+* Electronic lease signatures
+* Real-time messaging
+* Advanced reporting and analytics
+
