@@ -253,15 +253,77 @@ Reports shall assist property managers in monitoring operational performance.
 
 ### NFR-1 Performance
 
+The system shall respond to user requests within 3 seconds under normal operating conditions.
+
+The system shall support at least 100 concurrent users without significant degradation in performance.
+
+---
+
 ### NFR-2 Security
+
+The system shall provide secure user authentication using JSON Web Tokens (JWT).
+
+Passwords shall be encrypted before storage using industry-standard hashing algorithms.
+
+The system shall restrict access to resources based on user roles and permissions.
+
+---
 
 ### NFR-3 Reliability
 
+The system shall maintain data integrity during normal operation.
+
+The system shall recover gracefully from application errors and provide meaningful error messages to users.
+
+---
+
 ### NFR-4 Usability
+
+The user interface shall be intuitive and easy to navigate.
+
+Users shall be able to complete common tasks with minimal training.
+
+The system shall provide clear feedback for user actions.
+
+---
 
 ### NFR-5 Scalability
 
+The system architecture shall support future expansion of features and user growth.
+
+Database structures shall be designed to accommodate increasing volumes of data.
+
+---
+
 ### NFR-6 Maintainability
+
+The application shall follow modular software design principles.
+
+Source code shall be documented and organized to support future maintenance and enhancements.
+
+Version control shall be maintained through Git and GitHub.
+
+---
+
+### NFR-7 Availability
+
+The system should be available whenever users require access, subject to scheduled maintenance periods.
+
+Downtime should be minimized through proper deployment and monitoring practices.
+
+---
+
+### NFR-8 Compatibility
+
+The application shall function correctly on modern web browsers including:
+
+* Google Chrome
+* Mozilla Firefox
+* Microsoft Edge
+* Safari
+
+The user interface shall adapt to different screen sizes and resolutions.
+
 
 ---
 
