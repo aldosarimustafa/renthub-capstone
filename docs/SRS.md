@@ -136,19 +136,116 @@ The project depends on third-party technologies including React, Express, MongoD
 
 ### FR-1 User Registration
 
+The system shall allow new users to create an account by providing:
+
+* Full name
+* Email address
+* Password
+* User role
+
+The system shall validate user input and prevent duplicate email registrations.
+
+---
+
 ### FR-2 User Authentication
+
+The system shall allow registered users to log into the platform using their email address and password.
+
+The system shall:
+
+* Verify user credentials
+* Generate authentication tokens
+* Maintain secure user sessions
+* Allow users to log out
+
+---
 
 ### FR-3 Property Management
 
+The system shall allow property managers to:
+
+* Create property listings
+* Edit property information
+* Delete property listings
+* View all managed properties
+
+Property information shall include:
+
+* Property title
+* Description
+* Address
+* Rental price
+* Property images
+* Availability status
+
+---
+
 ### FR-4 Rental Applications
+
+The system shall allow tenants to submit rental applications for available properties.
+
+The system shall allow property managers to:
+
+* Review applications
+* Approve applications
+* Reject applications
+* View application history
+
+---
 
 ### FR-5 Lease Management
 
+The system shall allow property managers to:
+
+* Create lease agreements
+* Update lease information
+* View active leases
+* View expired leases
+
+Tenants shall be able to view their lease details.
+
+---
+
 ### FR-6 Payment Management
+
+The system shall allow:
+
+* Recording rent payments
+* Viewing payment history
+* Tracking payment status
+* Generating payment records
+
+Property managers shall be able to monitor tenant payment activity.
+
+---
 
 ### FR-7 Maintenance Requests
 
+The system shall allow tenants to:
+
+* Submit maintenance requests
+* Describe maintenance issues
+* Track maintenance status
+
+Property managers shall be able to:
+
+* Review requests
+* Update request status
+* Mark requests as completed
+
+---
+
 ### FR-8 Reporting Dashboard
+
+The system shall provide reporting functionality including:
+
+* Occupancy reports
+* Payment reports
+* Property reports
+* Maintenance reports
+
+Reports shall assist property managers in monitoring operational performance.
+
 
 ---
 
