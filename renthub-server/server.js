@@ -5,10 +5,12 @@ require("dotenv").config();
 const User = require("./models/User");
 const authRoutes = require("./routes/authRoutes");
 const app = express();
+const propertyRoutes = require("./routes/propertyRoutes");
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
+app.use("/api/properties", propertyRoutes);
 
 app.get("/", (req, res) => {
     res.send("RentHub API is running");
