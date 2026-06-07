@@ -176,6 +176,177 @@ The Maintenance Requests collection stores maintenance and repair requests submi
 
 ## 4. Collection Relationships
 
+The RentHub database consists of multiple collections that are related through reference fields using MongoDB ObjectIds.
+
+### **User ↔ Property Relationship**
+
+A property manager can manage multiple properties.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One manager → Many properties
+* Each property → One manager
+
+Reference:
+
+```text
+Property.managerId → User._id
+```
+
+---
+
+### **User ↔ Application Relationship**
+
+A tenant can submit multiple rental applications.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One tenant → Many applications
+* Each application → One tenant
+
+Reference:
+
+```text
+Application.tenantId → User._id
+```
+
+---
+
+### **Property ↔ Application Relationship**
+
+A property may receive multiple rental applications.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One property → Many applications
+* Each application → One property
+
+Reference:
+
+```text
+Application.propertyId → Property._id
+```
+
+---
+
+### **Tenant ↔ Lease Relationship**
+
+A tenant may have multiple lease records over time.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One tenant → Many leases
+* Each lease → One tenant
+
+Reference:
+
+```text
+Lease.tenantId → User._id
+```
+
+---
+
+### **Property ↔ Lease Relationship**
+
+Each lease belongs to a specific property.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One property → Many leases
+* Each lease → One property
+
+Reference:
+
+```text
+Lease.propertyId → Property._id
+```
+
+---
+
+### **Lease ↔ Payment Relationship**
+
+A lease can contain multiple payment records.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One lease → Many payments
+* Each payment → One lease
+
+Reference:
+
+```text
+Payment.leaseId → Lease._id
+```
+
+---
+
+### **Tenant ↔ Payment Relationship**
+
+A tenant can make multiple rent payments.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One tenant → Many payments
+* Each payment → One tenant
+
+Reference:
+
+```text
+Payment.tenantId → User._id
+```
+
+---
+
+### **Tenant ↔ Maintenance Request Relationship**
+
+A tenant may submit multiple maintenance requests.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One tenant → Many requests
+* Each request → One tenant
+
+Reference:
+
+```text
+MaintenanceRequest.tenantId → User._id
+```
+
+---
+
+### **Property ↔ Maintenance Request Relationship**
+
+A property may have multiple maintenance requests.
+
+Relationship Type:
+
+**One-to-Many**
+
+* One property → Many maintenance requests
+* Each request → One property
+
+Reference:
+
+```text
+MaintenanceRequest.propertyId → Property._id
+```
+
 ## 5. Schema Definitions
 
 ### User Schema
