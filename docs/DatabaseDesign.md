@@ -349,17 +349,158 @@ MaintenanceRequest.propertyId → Property._id
 
 ## 5. Schema Definitions
 
-### User Schema
+### **5.1 User Schema**
 
-### Property Schema
+The User schema stores information about all registered users in the platform.
 
-### Application Schema
+#### Fields
 
-### Lease Schema
+| Field     | Type   | Required |
+| --------- | ------ | -------- |
+| fullName  | String | Yes      |
+| email     | String | Yes      |
+| password  | String | Yes      |
+| role      | String | Yes      |
+| phone     | String | No       |
+| createdAt | Date   | Yes      |
+| updatedAt | Date   | Yes      |
 
-### Payment Schema
+#### Role Values
 
-### Maintenance Request Schema
+* Tenant
+* Property Manager
+* Administrator
+
+---
+
+### **5.2 Property Schema**
+
+The Property schema stores rental property information.
+
+#### Fields
+
+| Field       | Type     | Required |
+| ----------- | -------- | -------- |
+| title       | String   | Yes      |
+| description | String   | Yes      |
+| address     | String   | Yes      |
+| city        | String   | Yes      |
+| state       | String   | Yes      |
+| zipCode     | String   | Yes      |
+| rentAmount  | Number   | Yes      |
+| bedrooms    | Number   | Yes      |
+| bathrooms   | Number   | Yes      |
+| status      | String   | Yes      |
+| managerId   | ObjectId | Yes      |
+| createdAt   | Date     | Yes      |
+| updatedAt   | Date     | Yes      |
+
+#### Status Values
+
+* Available
+* Occupied
+* Maintenance
+
+### **5.3 Application Schema**
+
+The Application schema stores rental applications submitted by tenants.
+
+#### Fields
+
+| Field           | Type     | Required |
+| --------------- | -------- | -------- |
+| tenantId        | ObjectId | Yes      |
+| propertyId      | ObjectId | Yes      |
+| applicationDate | Date     | Yes      |
+| status          | String   | Yes      |
+| notes           | String   | No       |
+| createdAt       | Date     | Yes      |
+
+#### Status Values
+
+* Pending
+* Approved
+* Rejected
+
+---
+
+### **5.4 Lease Schema**
+
+The Lease schema stores lease agreement information.
+
+#### Fields
+
+| Field       | Type     | Required |
+| ----------- | -------- | -------- |
+| tenantId    | ObjectId | Yes      |
+| propertyId  | ObjectId | Yes      |
+| startDate   | Date     | Yes      |
+| endDate     | Date     | Yes      |
+| monthlyRent | Number   | Yes      |
+| leaseStatus | String   | Yes      |
+| createdAt   | Date     | Yes      |
+
+#### Lease Status Values
+
+* Active
+* Expired
+* Terminated
+
+---
+
+### **5.5 Payment Schema**
+
+The Payment schema stores rent payment records.
+
+#### Fields
+
+| Field         | Type     | Required |
+| ------------- | -------- | -------- |
+| tenantId      | ObjectId | Yes      |
+| leaseId       | ObjectId | Yes      |
+| amount        | Number   | Yes      |
+| paymentDate   | Date     | Yes      |
+| paymentMethod | String   | Yes      |
+| paymentStatus | String   | Yes      |
+| createdAt     | Date     | Yes      |
+
+#### Payment Status Values
+
+* Paid
+* Pending
+* Late
+
+---
+
+### **5.6 Maintenance Request Schema**
+
+The Maintenance Request schema stores maintenance issues submitted by tenants.
+
+#### Fields
+
+| Field       | Type     | Required |
+| ----------- | -------- | -------- |
+| tenantId    | ObjectId | Yes      |
+| propertyId  | ObjectId | Yes      |
+| title       | String   | Yes      |
+| description | String   | Yes      |
+| status      | String   | Yes      |
+| priority    | String   | Yes      |
+| submittedAt | Date     | Yes      |
+| completedAt | Date     | No       |
+
+#### Status Values
+
+* Open
+* In Progress
+* Completed
+
+#### Priority Values
+
+* Low
+* Medium
+* High
+
 
 ## 6. Data Dictionary
 
