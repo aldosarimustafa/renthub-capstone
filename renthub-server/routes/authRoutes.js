@@ -80,4 +80,12 @@ router.post("/login", async (req, res) => {
         res.status(500).json({ message: "Login failed", error: error.message });
     }
 });
+const authMiddleware = require("../middleware/authMiddleware");
+
+router.get("/profile", authMiddleware, async (req, res) => {
+    res.json({
+        message: "Protected route accessed successfully",
+        user: req.user,
+    });
+});
 module.exports = router;
