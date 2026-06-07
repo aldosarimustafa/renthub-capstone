@@ -74,17 +74,105 @@ The Users collection stores information for all registered users of the platform
 | createdAt | Date      | Account creation date          |
 | updatedAt | Date      | Last modification date         |
 
-### Users Collection
+### **Properties Collection**
 
-### Properties Collection
+The Properties collection stores information about rental properties managed through the platform.
 
-### Applications Collection
+#### Fields
 
-### Leases Collection
+| Field       | Data Type | Description                      |
+| ----------- | --------- | -------------------------------- |
+| _id         | ObjectId  | Unique identifier                |
+| title       | String    | Property title                   |
+| description | String    | Property description             |
+| address     | String    | Property address                 |
+| city        | String    | Property city                    |
+| state       | String    | Property state                   |
+| zipCode     | String    | Postal code                      |
+| rentAmount  | Number    | Monthly rental amount            |
+| bedrooms    | Number    | Number of bedrooms               |
+| bathrooms   | Number    | Number of bathrooms              |
+| status      | String    | Available, Occupied, Maintenance |
+| managerId   | ObjectId  | Property manager reference       |
+| createdAt   | Date      | Creation date                    |
+| updatedAt   | Date      | Last update date                 |
 
-### Payments Collection
+---
 
-### Maintenance Requests Collection
+### **Applications Collection**
+
+The Applications collection stores tenant rental applications.
+
+#### Fields
+
+| Field           | Data Type | Description                 |
+| --------------- | --------- | --------------------------- |
+| _id             | ObjectId  | Unique identifier           |
+| tenantId        | ObjectId  | Tenant reference            |
+| propertyId      | ObjectId  | Property reference          |
+| applicationDate | Date      | Submission date             |
+| status          | String    | Pending, Approved, Rejected |
+| notes           | String    | Manager notes               |
+| createdAt       | Date      | Creation date               |
+
+---
+
+### **Leases Collection**
+
+The Leases collection stores lease agreement information.
+
+#### Fields
+
+| Field       | Data Type | Description                 |
+| ----------- | --------- | --------------------------- |
+| _id         | ObjectId  | Unique identifier           |
+| tenantId    | ObjectId  | Tenant reference            |
+| propertyId  | ObjectId  | Property reference          |
+| startDate   | Date      | Lease start date            |
+| endDate     | Date      | Lease end date              |
+| monthlyRent | Number    | Monthly rent amount         |
+| leaseStatus | String    | Active, Expired, Terminated |
+| createdAt   | Date      | Creation date               |
+
+---
+
+### **Payments Collection**
+
+The Payments collection stores rent payment records.
+
+#### Fields
+
+| Field         | Data Type | Description          |
+| ------------- | --------- | -------------------- |
+| _id           | ObjectId  | Unique identifier    |
+| tenantId      | ObjectId  | Tenant reference     |
+| leaseId       | ObjectId  | Lease reference      |
+| amount        | Number    | Payment amount       |
+| paymentDate   | Date      | Payment date         |
+| paymentMethod | String    | Cash, Card, Transfer |
+| paymentStatus | String    | Paid, Pending, Late  |
+| createdAt     | Date      | Creation date        |
+
+---
+
+### **Maintenance Requests Collection**
+
+The Maintenance Requests collection stores maintenance and repair requests submitted by tenants.
+
+#### Fields
+
+| Field       | Data Type | Description                  |
+| ----------- | --------- | ---------------------------- |
+| _id         | ObjectId  | Unique identifier            |
+| tenantId    | ObjectId  | Tenant reference             |
+| propertyId  | ObjectId  | Property reference           |
+| title       | String    | Request title                |
+| description | String    | Issue description            |
+| status      | String    | Open, In Progress, Completed |
+| priority    | String    | Low, Medium, High            |
+| submittedAt | Date      | Submission date              |
+| completedAt | Date      | Completion date              |
+
 
 ## 4. Collection Relationships
 
