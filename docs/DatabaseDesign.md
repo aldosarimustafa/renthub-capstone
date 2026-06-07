@@ -504,6 +504,153 @@ The Maintenance Request schema stores maintenance issues submitted by tenants.
 
 ## 6. Data Dictionary
 
+### **Users Collection**
+
+| Field    | Description                         |
+| -------- | ----------------------------------- |
+| fullName | Full legal name of the user         |
+| email    | Unique email address used for login |
+| password | Encrypted password                  |
+| role     | User role within the system         |
+| phone    | User contact number                 |
+
+---
+
+### **Properties Collection**
+
+| Field       | Description                   |
+| ----------- | ----------------------------- |
+| title       | Property listing title        |
+| description | Detailed property description |
+| address     | Property street address       |
+| city        | Property city                 |
+| state       | Property state                |
+| zipCode     | Postal code                   |
+| rentAmount  | Monthly rental amount         |
+| bedrooms    | Number of bedrooms            |
+| bathrooms   | Number of bathrooms           |
+| status      | Current property status       |
+
+---
+
+### **Applications Collection**
+
+| Field           | Description                 |
+| --------------- | --------------------------- |
+| tenantId        | Applicant reference         |
+| propertyId      | Property reference          |
+| applicationDate | Submission date             |
+| status          | Application decision status |
+| notes           | Manager comments            |
+
+---
+
+### **Leases Collection**
+
+| Field       | Description           |
+| ----------- | --------------------- |
+| tenantId    | Tenant reference      |
+| propertyId  | Property reference    |
+| startDate   | Lease start date      |
+| endDate     | Lease end date        |
+| monthlyRent | Monthly rental amount |
+| leaseStatus | Current lease status  |
+
+---
+
+### **Payments Collection**
+
+| Field         | Description            |
+| ------------- | ---------------------- |
+| tenantId      | Tenant reference       |
+| leaseId       | Lease reference        |
+| amount        | Payment amount         |
+| paymentDate   | Date of payment        |
+| paymentMethod | Method of payment      |
+| paymentStatus | Current payment status |
+
+---
+
+### **Maintenance Requests Collection**
+
+| Field       | Description                |
+| ----------- | -------------------------- |
+| tenantId    | Tenant reference           |
+| propertyId  | Property reference         |
+| title       | Maintenance request title  |
+| description | Detailed issue description |
+| status      | Current request status     |
+| priority    | Request priority level     |
+
 ## 7. Entity Relationship Diagram (ERD)
 
+### Entity Relationships
+
+User (Tenant)
+│
+├── Applications
+├── Leases
+├── Payments
+└── Maintenance Requests
+
+User (Property Manager)
+│
+└── Properties
+
+Property
+│
+├── Applications
+├── Leases
+└── Maintenance Requests
+
+Lease
+│
+└── Payments
+
+### Relationship Summary
+
+* One Property Manager manages many Properties.
+* One Tenant can submit many Applications.
+* One Property can receive many Applications.
+* One Tenant can have many Leases.
+* One Property can have many Leases.
+* One Lease can contain many Payments.
+* One Tenant can make many Payments.
+* One Tenant can create many Maintenance Requests.
+* One Property can have many Maintenance Requests.
+
 ## 8. Database Security Considerations
+
+The RentHub database shall implement security measures to protect user information and maintain data integrity.
+
+### Authentication Security
+
+* Passwords shall be encrypted using bcrypt.
+* JWT tokens shall be used for user authentication.
+* User sessions shall be validated before accessing protected resources.
+
+### Authorization Security
+
+* Role-based access control shall restrict access to system functionality.
+* Users may access only resources permitted by their assigned role.
+
+### Data Protection
+
+* Sensitive user information shall not be stored in plain text.
+* Input validation shall be performed before database operations.
+* Database queries shall be protected against malicious input.
+
+### Backup and Recovery
+
+* Regular backups should be performed.
+* Recovery procedures should be documented.
+* Data loss risks should be minimized through backup strategies.
+
+### Future Security Enhancements
+
+Potential future enhancements include:
+
+* Multi-factor authentication
+* Audit logging
+* Data encryption at rest
+* Advanced access monitoring
