@@ -10,6 +10,7 @@ const applicationRoutes = require("./routes/applicationRoutes");
 const maintenanceRoutes = require("./routes/maintenanceRoutes");
 const leaseRoutes = require("./routes/leaseRoutes");
 const paymentRoutes = require("./routes/paymentRoutes");
+const reportRoutes = require("./routes/reportRoutes");
 
 app.use(cors());
 app.use(express.json());
@@ -19,6 +20,7 @@ app.use("/api/applications", applicationRoutes);
 app.use("/api/maintenance", maintenanceRoutes);
 app.use("/api/leases", leaseRoutes);
 app.use("/api/payments", paymentRoutes);
+app.use("/api/reports", reportRoutes);
 
 app.get("/", (req, res) => {
     res.send("RentHub API is running");
