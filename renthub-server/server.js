@@ -10,6 +10,7 @@ const applicationRoutes = require("./routes/applicationRoutes");
 const maintenanceRoutes = require("./routes/maintenanceRoutes");
 const leaseRoutes = require("./routes/leaseRoutes");
 
+
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
