@@ -7,12 +7,14 @@ const authRoutes = require("./routes/authRoutes");
 const app = express();
 const propertyRoutes = require("./routes/propertyRoutes");
 const applicationRoutes = require("./routes/applicationRoutes");
+const maintenanceRoutes = require("./routes/maintenanceRoutes");
 
 app.use(cors());
 app.use(express.json());
 app.use("/api/auth", authRoutes);
 app.use("/api/properties", propertyRoutes);
 app.use("/api/applications", applicationRoutes);
+app.use("/api/maintenance", maintenanceRoutes);
 
 app.get("/", (req, res) => {
     res.send("RentHub API is running");
