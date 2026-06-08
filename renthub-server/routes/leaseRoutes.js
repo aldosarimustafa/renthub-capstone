@@ -1,0 +1,38 @@
+const express = require("express");
+const Lease = require("../models/Lease");
+const authMiddleware = require("../middleware/authMiddleware");
+
+const router = express.Router();
+
+router.post("/", authMiddleware, async (req, res) => {
+    try {
+        const lease = await Lease.create(req.body);
+
+        res.status(201).json({
+            message: "Lease created successfully",
+            lease,
+        });
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to create lease",
+            error: error.message,
+        });
+    }
+});
+
+router.get("/", authMiddleware, async (req, res) => {
+    try {
+        const leases = await Lease.find()
+            .populate("tenantId", "fullName email")
+            .populate("propertyId", "title address");
+
+        res.json(leases);
+    } catch (error) {
+        res.status(500).json({
+            message: "Failed to fetch leases",
+            error: error.message,
+        });
+    }
+});
+
+module.exports = router;
