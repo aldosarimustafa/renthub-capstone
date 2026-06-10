@@ -8,7 +8,6 @@ function Register() {
     const [fullName, setFullName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [role, setRole] = useState("Tenant");
     const [phone, setPhone] = useState("");
     const [message, setMessage] = useState("");
 
@@ -20,7 +19,7 @@ function Register() {
                 fullName,
                 email,
                 password,
-                role,
+                role: "Tenant",
                 phone,
             });
 
@@ -81,32 +80,20 @@ function Register() {
                                     />
                                 </div>
 
-                                <div className="mb-3">
-                                    <label className="form-label">Role</label>
-                                    <select
-                                        className="form-select"
-                                        value={role}
-                                        onChange={(e) => setRole(e.target.value)}
-                                    >
-                                        <option>Tenant</option>
-                                        <option>Property Manager</option>
-                                        <option>Administrator</option>
-                                    </select>
+                                <div className="alert alert-info">
+                                    New accounts are created as Tenant accounts. Admin accounts
+                                    are created by the system owner.
                                 </div>
 
                                 <button
                                     type="submit"
                                     className="btn btn-success w-100"
                                 >
-                                    Register
+                                    Register as Tenant
                                 </button>
                             </form>
 
-                            {message && (
-                                <p className="mt-3">
-                                    {message}
-                                </p>
-                            )}
+                            {message && <p className="mt-3">{message}</p>}
                         </div>
                     </div>
                 </div>
