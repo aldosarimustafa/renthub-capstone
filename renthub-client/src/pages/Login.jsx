@@ -30,33 +30,50 @@ function Login() {
     };
 
     return (
-        <div>
-            <h1>Login</h1>
+        <div className="container mt-4">
+            <div className="row justify-content-center">
+                <div className="col-md-6">
+                    <div className="card shadow">
+                        <div className="card-body">
+                            <h1 className="mb-4">Login</h1>
 
-            <form onSubmit={handleLogin}>
-                <div>
-                    <label>Email</label>
-                    <br />
-                    <input
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
+                            <form onSubmit={handleLogin}>
+                                <div className="mb-3">
+                                    <label className="form-label">Email</label>
+                                    <input
+                                        className="form-control"
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
+                                    />
+                                </div>
+
+                                <div className="mb-3">
+                                    <label className="form-label">Password</label>
+                                    <input
+                                        type="password"
+                                        className="form-control"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    className="btn btn-primary w-100"
+                                >
+                                    Login
+                                </button>
+                            </form>
+
+                            {message && (
+                                <p className="mt-3">
+                                    {message}
+                                </p>
+                            )}
+                        </div>
+                    </div>
                 </div>
-
-                <div>
-                    <label>Password</label>
-                    <br />
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                    />
-                </div>
-
-                <button type="submit">Login</button>
-            </form>
-
-            <p>{message}</p>
+            </div>
         </div>
     );
 }
