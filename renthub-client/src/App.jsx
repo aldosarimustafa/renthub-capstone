@@ -6,6 +6,7 @@ import Register from "./pages/Register";
 import Properties from "./pages/Properties";
 import PropertyDetails from "./pages/PropertyDetails";
 import Navbar from "./components/Navbar";
+import Reports from "./pages/Reports";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           path="/properties/:id"
           element={<PropertyDetails />}
         />
+        <Route path="/reports" element={<Reports />} />
 
         <Route path="/login" element={<Login />} />
 
