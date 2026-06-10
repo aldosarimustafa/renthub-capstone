@@ -24,15 +24,64 @@ function Reports() {
     }
 
     return (
-        <div>
-            <h1>Reports Dashboard</h1>
+        <div className="container mt-4">
+            <h1 className="mb-4">Reports Dashboard</h1>
 
-            <p>Total Users: {report.totalUsers}</p>
-            <p>Total Properties: {report.totalProperties}</p>
-            <p>Total Applications: {report.totalApplications}</p>
-            <p>Total Maintenance Requests: {report.totalMaintenanceRequests}</p>
-            <p>Total Leases: {report.totalLeases}</p>
-            <p>Total Payments: {report.totalPayments}</p>
+            <div className="row">
+                <div className="col-md-4 mb-3">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5>Total Users</h5>
+                            <h2>{report.totalUsers}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-4 mb-3">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5>Total Properties</h5>
+                            <h2>{report.totalProperties}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-4 mb-3">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5>Total Applications</h5>
+                            <h2>{report.totalApplications}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-4 mb-3">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5>Maintenance Requests</h5>
+                            <h2>{report.totalMaintenanceRequests}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-4 mb-3">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5>Total Leases</h5>
+                            <h2>{report.totalLeases}</h2>
+                        </div>
+                    </div>
+                </div>
+
+                <div className="col-md-4 mb-3">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h5>Total Payments</h5>
+                            <h2>{report.totalPayments}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
