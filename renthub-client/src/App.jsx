@@ -9,6 +9,7 @@ import Navbar from "./components/Navbar";
 import Reports from "./pages/Reports";
 import Maintenance from "./pages/Maintenance";
 import Payments from "./pages/Payments";
+import Leases from "./pages/Leases";
 
 function App() {
   return (
@@ -33,6 +34,8 @@ function App() {
         <Route path="/maintenance" element={<Maintenance />} />
 
         <Route path="/payments" element={<Payments />} />
+
+        <Route path="/leases" element={<Leases />} />
       </Routes>
     </BrowserRouter>
   );

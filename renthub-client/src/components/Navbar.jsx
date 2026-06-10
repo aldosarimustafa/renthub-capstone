@@ -12,7 +12,9 @@ function Navbar() {
                 <Link to="/register">Register</Link> |{" "}
                 <Link to="/reports">Reports</Link> |{" "}
                 <Link to="/maintenance">Maintenance</Link> |{" "}
-                <Link to="/payments">Payments</Link>
+                <Link to="/payments">Payments</Link> |{" "}
+                <Link to="/leases">Leases</Link>
+
             </div>
         </nav>
     );
