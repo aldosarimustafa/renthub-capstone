@@ -7,6 +7,8 @@ import Properties from "./pages/Properties";
 import PropertyDetails from "./pages/PropertyDetails";
 import Navbar from "./components/Navbar";
 import Reports from "./pages/Reports";
+import Maintenance from "./pages/Maintenance";
+import Payments from "./pages/Payments";
 
 function App() {
   return (
@@ -27,6 +29,10 @@ function App() {
         <Route path="/login" element={<Login />} />
 
         <Route path="/register" element={<Register />} />
+
+        <Route path="/maintenance" element={<Maintenance />} />
+
+        <Route path="/payments" element={<Payments />} />
       </Routes>
     </BrowserRouter>
   );
