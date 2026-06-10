@@ -16,49 +16,66 @@ function Leases() {
     }, []);
 
     return (
-        <div>
-            <h1>Leases</h1>
+        <div className="container mt-4">
+            <h1 className="mb-4">Leases</h1>
 
-            {error && <p>{error}</p>}
+            {error && (
+                <div className="alert alert-danger">
+                    {error}
+                </div>
+            )}
 
             {leases.length === 0 && !error && (
-                <p>No leases found.</p>
+                <div className="alert alert-info">
+                    No leases found.
+                </div>
             )}
 
             {leases.map((lease) => (
                 <div
                     key={lease._id}
-                    style={{
-                        border: "1px solid #ccc",
-                        marginBottom: "15px",
-                        padding: "10px",
-                    }}
+                    className="card mb-3 shadow-sm"
                 >
-                    <h3>{lease.propertyId?.title}</h3>
+                    <div className="card-body">
+                        <h4 className="card-title">
+                            {lease.propertyId?.title}
+                        </h4>
 
-                    <p>
-                        Tenant: {lease.tenantId?.fullName}
-                    </p>
+                        <div className="row">
+                            <div className="col-md-6">
+                                <p>
+                                    <strong>Tenant:</strong>{" "}
+                                    {lease.tenantId?.fullName}
+                                </p>
 
-                    <p>
-                        Monthly Rent: ${lease.monthlyRent}
-                    </p>
+                                <p>
+                                    <strong>Monthly Rent:</strong>{" "}
+                                    ${lease.monthlyRent}
+                                </p>
 
-                    <p>
-                        Status: {lease.leaseStatus}
-                    </p>
+                                <p>
+                                    <strong>Status:</strong>{" "}
+                                    {lease.leaseStatus}
+                                </p>
+                            </div>
 
-                    <p>
-                        Start: {new Date(
-                            lease.startDate
-                        ).toLocaleDateString()}
-                    </p>
+                            <div className="col-md-6">
+                                <p>
+                                    <strong>Start Date:</strong>{" "}
+                                    {new Date(
+                                        lease.startDate
+                                    ).toLocaleDateString()}
+                                </p>
 
-                    <p>
-                        End: {new Date(
-                            lease.endDate
-                        ).toLocaleDateString()}
-                    </p>
+                                <p>
+                                    <strong>End Date:</strong>{" "}
+                                    {new Date(
+                                        lease.endDate
+                                    ).toLocaleDateString()}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             ))}
         </div>

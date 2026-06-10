@@ -16,7 +16,7 @@ function Payments() {
     }, []);
 
     return (
-        <div>
+        <div className="container mt-4">
             <h1>Payments</h1>
 
             {error && <p>{error}</p>}
@@ -26,18 +26,41 @@ function Payments() {
             {payments.map((payment) => (
                 <div
                     key={payment._id}
-                    style={{
-                        border: "1px solid #ccc",
-                        marginBottom: "15px",
-                        padding: "10px",
-                    }}
+                    className="card mb-3 shadow-sm"
                 >
-                    <h3>${payment.amount}</h3>
-                    <p>Status: {payment.paymentStatus}</p>
-                    <p>Method: {payment.paymentMethod}</p>
-                    <p>Date: {new Date(payment.paymentDate).toLocaleDateString()}</p>
-                    <p>Tenant: {payment.tenantId?.fullName}</p>
-                    <p>Lease: {payment.leaseId?._id}</p>
+                    <div className="card-body">
+                        <h4 className="card-title">
+                            ${payment.amount}
+                        </h4>
+
+                        <div className="row">
+                            <div className="col-md-6">
+                                <p>
+                                    <strong>Status:</strong>{" "}
+                                    {payment.paymentStatus}
+                                </p>
+
+                                <p>
+                                    <strong>Method:</strong>{" "}
+                                    {payment.paymentMethod}
+                                </p>
+                            </div>
+
+                            <div className="col-md-6">
+                                <p>
+                                    <strong>Tenant:</strong>{" "}
+                                    {payment.tenantId?.fullName}
+                                </p>
+
+                                <p>
+                                    <strong>Date:</strong>{" "}
+                                    {new Date(
+                                        payment.paymentDate
+                                    ).toLocaleDateString()}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             ))}
         </div>
