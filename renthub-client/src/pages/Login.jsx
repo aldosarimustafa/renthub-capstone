@@ -22,7 +22,7 @@ function Login() {
             localStorage.setItem("user", JSON.stringify(res.data.user));
 
             setMessage("Login successful");
-            navigate("/properties");
+            window.location.href = "/properties";
         } catch (error) {
             setMessage("Login failed");
             console.error(error);
