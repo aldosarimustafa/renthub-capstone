@@ -1,19 +1,24 @@
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import PropertySlideshow from "../components/PropertySlideshow";
+import api from "../api/api";
 
 function Home() {
+    const [featuredProperties, setFeaturedProperties] = useState([]);
+
+    useEffect(() => {
+        api
+            .get("/properties")
+            .then((res) => setFeaturedProperties(res.data.slice(0, 3)))
+            .catch((err) => console.error(err));
+    }, []);
+
     return (
         <div>
-            <div
-                className="text-white text-center d-flex align-items-center"
-                style={{
-                    minHeight: "500px",
-                    backgroundImage:
-                        "linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url('https://images.unsplash.com/photo-1568605114967-8130f3a36994')",
-                    backgroundSize: "cover",
-                    backgroundPosition: "center",
-                }}
-            >
-                <div className="container">
+            <div className="position-relative">
+                <PropertySlideshow />
+
+                <div className="position-absolute top-50 start-50 translate-middle text-center text-white hero-overlay">
                     <h1 className="display-3 fw-bold">Welcome to RentHub</h1>
                     <p className="lead">
                         Find, apply, and manage your rental property in one place.
@@ -30,33 +35,55 @@ function Home() {
             </div>
 
             <div className="container mt-5">
-                <div className="row text-center">
-                    <div className="col-md-4 mb-4">
-                        <div className="card shadow-sm h-100">
-                            <div className="card-body">
-                                <h4>Browse Rentals</h4>
-                                <p>Search available properties by city, rent, and bedrooms.</p>
-                            </div>
-                        </div>
-                    </div>
+                <h2 className="mb-4 text-center">Featured Properties</h2>
 
-                    <div className="col-md-4 mb-4">
-                        <div className="card shadow-sm h-100">
-                            <div className="card-body">
-                                <h4>Apply Online</h4>
-                                <p>Submit rental applications and track approval status.</p>
-                            </div>
+                <div className="row">
+                    {featuredProperties.length === 0 ? (
+                        <div className="alert alert-info">
+                            No featured properties available right now.
                         </div>
-                    </div>
+                    ) : (
+                        featuredProperties.map((property) => (
+                            <div className="col-md-4 mb-4" key={property._id}>
+                                <div className="card shadow-sm h-100">
+                                    {property.imageUrl && (
+                                        <img
+                                            src={property.imageUrl}
+                                            alt={property.title}
+                                            className="card-img-top"
+                                            style={{
+                                                height: "220px",
+                                                objectFit: "cover",
+                                            }}
+                                        />
+                                    )}
 
-                    <div className="col-md-4 mb-4">
-                        <div className="card shadow-sm h-100">
-                            <div className="card-body">
-                                <h4>Manage Your Lease</h4>
-                                <p>View leases, payments, and maintenance requests.</p>
+                                    <div className="card-body">
+                                        <h4>{property.title}</h4>
+
+                                        <p>
+                                            {property.city}, {property.state}
+                                        </p>
+
+                                        <p>
+                                            <strong>${property.rentAmount}/month</strong>
+                                        </p>
+
+                                        <p>
+                                            {property.bedrooms} Bed • {property.bathrooms} Bath
+                                        </p>
+
+                                        <Link
+                                            to={`/properties/${property._id}`}
+                                            className="btn btn-primary"
+                                        >
+                                            View Details
+                                        </Link>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
+                        ))
+                    )}
                 </div>
             </div>
         </div>
