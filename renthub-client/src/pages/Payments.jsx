@@ -24,17 +24,19 @@ function Payments() {
     const loadData = () => {
         api.get("/payments").then((res) => setPayments(res.data));
 
-        api.get("/leases").then((res) => {
-            setLeases(res.data);
+        if (user?.role === "Tenant") {
+            api.get("/leases").then((res) => {
+                setLeases(res.data);
 
-            if (res.data.length > 0) {
-                setForm({
-                    leaseId: res.data[0]._id,
-                    amount: res.data[0].monthlyRent,
-                    paymentMethod: "Transfer",
-                });
-            }
-        });
+                if (res.data.length > 0) {
+                    setForm({
+                        leaseId: res.data[0]._id,
+                        amount: res.data[0].monthlyRent,
+                        paymentMethod: "Transfer",
+                    });
+                }
+            });
+        }
     };
 
     useEffect(() => {
@@ -84,7 +86,6 @@ function Payments() {
 
         try {
             await api.post("/payments", {
-                tenantId: user.id,
                 leaseId: form.leaseId,
                 amount: form.amount,
                 paymentMethod: form.paymentMethod,
@@ -111,119 +112,127 @@ function Payments() {
         <div className="container mt-4">
             <h1 className="mb-4">Payments</h1>
 
-            <div className="card mb-4 shadow-sm">
-                <div className="card-body">
-                    <h3>Submit Payment</h3>
+            {user?.role === "Tenant" && (
+                <div className="card mb-4 shadow-sm">
+                    <div className="card-body">
+                        <h3>Submit Payment</h3>
 
-                    <form onSubmit={handleSubmit}>
-                        <div className="mb-3">
-                            <label className="form-label">Lease</label>
-                            <select
-                                className="form-select"
-                                name="leaseId"
-                                value={form.leaseId}
-                                onChange={handleChange}
-                                required
-                            >
-                                {leases.map((lease) => (
-                                    <option key={lease._id} value={lease._id}>
-                                        {lease.propertyId?.title} - ${lease.monthlyRent}/month
-                                    </option>
-                                ))}
-                            </select>
-                        </div>
+                        <form onSubmit={handleSubmit}>
+                            <div className="mb-3">
+                                <label className="form-label">Lease</label>
+                                <select
+                                    className="form-select"
+                                    name="leaseId"
+                                    value={form.leaseId}
+                                    onChange={handleChange}
+                                    required
+                                >
+                                    {leases.map((lease) => (
+                                        <option key={lease._id} value={lease._id}>
+                                            {lease.propertyId?.title} - ${lease.monthlyRent}/month
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
 
-                        <div className="mb-3">
-                            <label className="form-label">Amount</label>
-                            <input
-                                className="form-control"
-                                name="amount"
-                                type="number"
-                                value={form.amount}
-                                onChange={handleChange}
-                                required
-                            />
-                        </div>
+                            <div className="mb-3">
+                                <label className="form-label">Amount</label>
+                                <input
+                                    className="form-control"
+                                    name="amount"
+                                    type="number"
+                                    value={form.amount}
+                                    onChange={handleChange}
+                                    required
+                                />
+                            </div>
 
-                        <div className="mb-3">
-                            <label className="form-label">Payment Method</label>
-                            <select
-                                className="form-select"
-                                name="paymentMethod"
-                                value={form.paymentMethod}
-                                onChange={handleChange}
-                            >
-                                <option>Transfer</option>
-                                <option>Card</option>
-                                <option>Cash</option>
-                            </select>
-                        </div>
+                            <div className="mb-3">
+                                <label className="form-label">Payment Method</label>
+                                <select
+                                    className="form-select"
+                                    name="paymentMethod"
+                                    value={form.paymentMethod}
+                                    onChange={handleChange}
+                                >
+                                    <option>Transfer</option>
+                                    <option>Card</option>
+                                    <option>Cash</option>
+                                </select>
+                            </div>
 
-                        {form.paymentMethod === "Card" && (
-                            <div className="card mb-3">
-                                <div className="card-body">
-                                    <h5>Card Information</h5>
+                            {form.paymentMethod === "Card" && (
+                                <div className="card mb-3">
+                                    <div className="card-body">
+                                        <h5>Card Information</h5>
 
-                                    <div className="alert alert-warning">
-                                        Demo only. Do not enter real card information.
-                                    </div>
+                                        <div className="alert alert-warning">
+                                            Demo only. Do not enter real card information.
+                                        </div>
 
-                                    <div className="mb-3">
-                                        <label className="form-label">Card Number</label>
-                                        <input
-                                            className="form-control"
-                                            name="cardNumber"
-                                            value={cardInfo.cardNumber}
-                                            onChange={handleCardChange}
-                                            placeholder="1234 5678 9012 3456"
-                                        />
-                                    </div>
-
-                                    <div className="mb-3">
-                                        <label className="form-label">Card Holder Name</label>
-                                        <input
-                                            className="form-control"
-                                            name="cardHolder"
-                                            value={cardInfo.cardHolder}
-                                            onChange={handleCardChange}
-                                        />
-                                    </div>
-
-                                    <div className="row">
-                                        <div className="col-md-6 mb-3">
-                                            <label className="form-label">Expiry Date</label>
+                                        <div className="mb-3">
+                                            <label className="form-label">Card Number</label>
                                             <input
                                                 className="form-control"
-                                                name="expiryDate"
-                                                value={cardInfo.expiryDate}
+                                                name="cardNumber"
+                                                value={cardInfo.cardNumber}
                                                 onChange={handleCardChange}
-                                                placeholder="MM/YY"
+                                                placeholder="1234 5678 9012 3456"
                                             />
                                         </div>
 
-                                        <div className="col-md-6 mb-3">
-                                            <label className="form-label">CVV</label>
+                                        <div className="mb-3">
+                                            <label className="form-label">Card Holder Name</label>
                                             <input
                                                 className="form-control"
-                                                name="cvv"
-                                                value={cardInfo.cvv}
+                                                name="cardHolder"
+                                                value={cardInfo.cardHolder}
                                                 onChange={handleCardChange}
-                                                placeholder="123"
                                             />
+                                        </div>
+
+                                        <div className="row">
+                                            <div className="col-md-6 mb-3">
+                                                <label className="form-label">Expiry Date</label>
+                                                <input
+                                                    className="form-control"
+                                                    name="expiryDate"
+                                                    value={cardInfo.expiryDate}
+                                                    onChange={handleCardChange}
+                                                    placeholder="MM/YY"
+                                                />
+                                            </div>
+
+                                            <div className="col-md-6 mb-3">
+                                                <label className="form-label">CVV</label>
+                                                <input
+                                                    className="form-control"
+                                                    name="cvv"
+                                                    value={cardInfo.cvv}
+                                                    onChange={handleCardChange}
+                                                    placeholder="123"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        <button className="btn btn-primary" type="submit">
-                            Submit Payment
-                        </button>
-                    </form>
+                            <button className="btn btn-primary" type="submit">
+                                Submit Payment
+                            </button>
+                        </form>
 
-                    {message && <div className="alert alert-info mt-3">{message}</div>}
+                        {message && <div className="alert alert-info mt-3">{message}</div>}
+                    </div>
                 </div>
-            </div>
+            )}
+
+            {user?.role === "Administrator" && (
+                <div className="alert alert-info">
+                    Administrator view: payment records are shown below.
+                </div>
+            )}
 
             <h2 className="mb-3">Payment History</h2>
 
@@ -242,6 +251,16 @@ function Payments() {
 
                         <p>
                             <strong>Tenant:</strong> {payment.tenantId?.fullName}
+                        </p>
+
+                        <p>
+                            <strong>Property:</strong>{" "}
+                            {payment.leaseId?.propertyId?.title || "Property not available"}
+                        </p>
+
+                        <p>
+                            <strong>Property Address:</strong>{" "}
+                            {payment.leaseId?.propertyId?.address || "Address not available"}
                         </p>
 
                         <p>
