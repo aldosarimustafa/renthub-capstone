@@ -34,6 +34,10 @@ function Navbar() {
                         <Link className="nav-link" to="/payments">
                             My Payments
                         </Link>
+
+                        <Link className="nav-link" to="/applications">
+                            My Applications
+                        </Link>
                     </>
                 )}
 
@@ -57,6 +61,10 @@ function Navbar() {
 
                         <Link className="nav-link" to="/reports">
                             Reports
+                        </Link>
+
+                        <Link className="nav-link" to="/applications">
+                            Applications
                         </Link>
                     </>
                 )}

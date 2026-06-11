@@ -259,7 +259,16 @@ function AdminDashboard() {
                                 <p>
                                     {property.bedrooms} Bed • {property.bathrooms} Bath
                                 </p>
-                                <p>Status: {property.status}</p>
+                                <p>
+                                    <strong>Status:</strong> {property.status}
+                                </p>
+
+                                {property.status === "Occupied" && property.occupiedBy && (
+                                    <p>
+                                        <strong>Occupied By:</strong>{" "}
+                                        {property.occupiedBy.fullName} ({property.occupiedBy.email})
+                                    </p>
+                                )}
 
                                 <button className="btn btn-warning me-2" onClick={() => handleEdit(property)}>
                                     Edit

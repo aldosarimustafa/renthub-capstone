@@ -2,13 +2,52 @@ import { Link } from "react-router-dom";
 
 function PropertyCard({ property }) {
     return (
-        <div style={{ border: "1px solid #ddd", padding: "15px", margin: "10px" }}>
-            <h3>{property.title}</h3>
-            <p>{property.city}, {property.state}</p>
-            <p>${property.rentAmount}/month</p>
-            <p>{property.bedrooms} bed • {property.bathrooms} bath</p>
+        <div className="card mb-4 shadow-sm">
+            {property.imageUrl && (
+                <img
+                    src={property.imageUrl}
+                    alt={property.title}
+                    className="card-img-top"
+                    style={{
+                        height: "250px",
+                        objectFit: "cover",
+                    }}
+                />
+            )}
 
-            <Link to={`/properties/${property._id}`}>View Details</Link>
+            <div className="card-body">
+                <h4 className="card-title">
+                    {property.title}
+                </h4>
+
+                <p className="card-text">
+                    {property.city}, {property.state}
+                </p>
+
+                <p>
+                    <strong>
+                        ${property.rentAmount}/month
+                    </strong>
+                </p>
+
+                <p>
+                    {property.bedrooms} Bed •{" "}
+                    {property.bathrooms} Bath
+                </p>
+
+                <p>
+                    <span className="badge bg-success">
+                        {property.status}
+                    </span>
+                </p>
+
+                <Link
+                    className="btn btn-primary"
+                    to={`/properties/${property._id}`}
+                >
+                    View Details
+                </Link>
+            </div>
         </div>
     );
 }

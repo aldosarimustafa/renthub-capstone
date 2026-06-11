@@ -12,12 +12,18 @@ function Properties() {
     }, []);
 
     return (
-        <div>
+        <div className="container mt-4">
             <h1>Available Properties</h1>
 
-            {properties.map((property) => (
-                <PropertyCard key={property._id} property={property} />
-            ))}
+            {properties.length === 0 ? (
+                <div className="alert alert-info mt-3">
+                    No current properties available.
+                </div>
+            ) : (
+                properties.map((property) => (
+                    <PropertyCard key={property._id} property={property} />
+                ))
+            )}
         </div>
     );
 }

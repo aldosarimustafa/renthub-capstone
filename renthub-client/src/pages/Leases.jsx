@@ -62,16 +62,17 @@ function Leases() {
                             <div className="col-md-6">
                                 <p>
                                     <strong>Start Date:</strong>{" "}
-                                    {new Date(
-                                        lease.startDate
-                                    ).toLocaleDateString()}
+                                    {new Date(lease.startDate).toLocaleDateString()}
                                 </p>
 
                                 <p>
                                     <strong>End Date:</strong>{" "}
-                                    {new Date(
-                                        lease.endDate
-                                    ).toLocaleDateString()}
+                                    {new Date(lease.endDate).toLocaleDateString()}
+                                </p>
+
+                                <p>
+                                    <strong>Created:</strong>{" "}
+                                    {new Date(lease.createdAt).toLocaleString()}
                                 </p>
                             </div>
                         </div>
