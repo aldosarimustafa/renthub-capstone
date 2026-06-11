@@ -36,7 +36,7 @@ router.get("/", authMiddleware, async (req, res) => {
 
         const leases = await Lease.find(query)
             .populate("tenantId", "fullName email")
-            .populate("propertyId", "title address");
+            .populate("propertyId", "title address city state rentAmount");
 
         res.json(leases);
     } catch (error) {
@@ -46,5 +46,46 @@ router.get("/", authMiddleware, async (req, res) => {
         });
     }
 });
+
+router.put(
+    "/:id",
+    authMiddleware,
+    roleMiddleware("Administrator"),
+    async (req, res) => {
+        try {
+            const lease = await Lease.findByIdAndUpdate(
+                req.params.id,
+                {
+                    startDate: req.body.startDate,
+                    endDate: req.body.endDate,
+                    monthlyRent: req.body.monthlyRent,
+                    leaseStatus: req.body.leaseStatus,
+                },
+                {
+                    new: true,
+                    runValidators: true,
+                }
+            )
+                .populate("tenantId", "fullName email")
+                .populate("propertyId", "title address city state rentAmount");
+
+            if (!lease) {
+                return res.status(404).json({
+                    message: "Lease not found",
+                });
+            }
+
+            res.json({
+                message: "Lease updated successfully",
+                lease,
+            });
+        } catch (error) {
+            res.status(500).json({
+                message: "Failed to update lease",
+                error: error.message,
+            });
+        }
+    }
+);
 
 module.exports = router;
