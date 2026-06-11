@@ -6,7 +6,13 @@ const router = express.Router();
 
 router.post("/", authMiddleware, async (req, res) => {
     try {
-        const payment = await Payment.create(req.body);
+        const payment = await Payment.create({
+            tenantId: req.user.id,
+            leaseId: req.body.leaseId,
+            amount: req.body.amount,
+            paymentMethod: req.body.paymentMethod,
+            paymentStatus: "Paid",
+        });
 
         res.status(201).json({
             message: "Payment recorded successfully",
@@ -22,7 +28,13 @@ router.post("/", authMiddleware, async (req, res) => {
 
 router.get("/", authMiddleware, async (req, res) => {
     try {
-        const payments = await Payment.find()
+        let query = {};
+
+        if (req.user.role !== "Administrator") {
+            query.tenantId = req.user.id;
+        }
+
+        const payments = await Payment.find(query)
             .populate("tenantId", "fullName email")
             .populate("leaseId");
 
