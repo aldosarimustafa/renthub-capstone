@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api/api";
 
 function AdminDashboard() {
+    const navigate = useNavigate();
+
     const [message, setMessage] = useState("");
     const [properties, setProperties] = useState([]);
     const [editingId, setEditingId] = useState(null);
@@ -30,25 +33,20 @@ function AdminDashboard() {
     const [form, setForm] = useState(emptyForm);
 
     const loadProperties = () => {
-        api
-            .get("/properties")
+        api.get("/properties")
             .then((res) => setProperties(res.data))
             .catch((err) => console.error(err));
     };
 
     const loadDashboardData = async () => {
         try {
-            const [
-                propertiesRes,
-                applicationsRes,
-                maintenanceRes,
-                paymentsRes,
-            ] = await Promise.all([
-                api.get("/properties"),
-                api.get("/applications"),
-                api.get("/maintenance"),
-                api.get("/payments"),
-            ]);
+            const [propertiesRes, applicationsRes, maintenanceRes, paymentsRes] =
+                await Promise.all([
+                    api.get("/properties"),
+                    api.get("/applications"),
+                    api.get("/maintenance"),
+                    api.get("/payments"),
+                ]);
 
             setStats({
                 totalProperties: propertiesRes.data.length,
@@ -124,7 +122,10 @@ function AdminDashboard() {
             status: property.status || "Available",
         });
 
-        window.scrollTo(0, 0);
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
     };
 
     const handleDelete = async (propertyId) => {
@@ -182,27 +183,25 @@ function AdminDashboard() {
 
             <div className="card shadow-sm mb-4">
                 <div className="card-body">
-                    <h3>{editingId ? "Edit Property" : "Add Property"}</h3>
+                    <h3>{editingId ? "Editing Property" : "Add Property"}</h3>
+
+                    {editingId && (
+                        <div className="alert alert-warning">
+                            You are currently editing a property. Make your changes below,
+                            then click Update Property.
+                        </div>
+                    )}
 
                     <form onSubmit={handleSubmit}>
                         <input className="form-control mb-3" name="title" placeholder="Title" value={form.title} onChange={handleChange} required />
-
                         <textarea className="form-control mb-3" name="description" placeholder="Description" value={form.description} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="address" placeholder="Address" value={form.address} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="city" placeholder="City" value={form.city} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="state" placeholder="State" value={form.state} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="zipCode" placeholder="Zip Code" value={form.zipCode} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="rentAmount" type="number" placeholder="Rent Amount" value={form.rentAmount} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="bedrooms" type="number" placeholder="Bedrooms" value={form.bedrooms} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="bathrooms" type="number" placeholder="Bathrooms" value={form.bathrooms} onChange={handleChange} required />
-
                         <input className="form-control mb-3" name="imageUrl" placeholder="Property Image URL" value={form.imageUrl} onChange={handleChange} />
 
                         <select className="form-select mb-3" name="status" value={form.status} onChange={handleChange}>
@@ -249,7 +248,6 @@ function AdminDashboard() {
                         <div className={property.imageUrl ? "col-md-8" : "col-md-12"}>
                             <div className="card-body">
                                 <h4>{property.title}</h4>
-
                                 <p>{property.description}</p>
 
                                 <p>
@@ -286,13 +284,11 @@ function AdminDashboard() {
                                         {property.occupiedBy ? (
                                             <>
                                                 <p>
-                                                    <strong>Tenant:</strong>{" "}
-                                                    {property.occupiedBy.fullName}
+                                                    <strong>Tenant:</strong> {property.occupiedBy.fullName}
                                                 </p>
 
                                                 <p>
-                                                    <strong>Email:</strong>{" "}
-                                                    {property.occupiedBy.email}
+                                                    <strong>Email:</strong> {property.occupiedBy.email}
                                                 </p>
 
                                                 <p>
@@ -316,8 +312,14 @@ function AdminDashboard() {
                                 )}
 
                                 <button className="btn btn-warning me-2" onClick={() => handleEdit(property)}>
-                                    Edit
+                                    Edit Property
                                 </button>
+
+                                {property.status === "Occupied" && (
+                                    <button className="btn btn-info me-2" onClick={() => navigate("/leases")}>
+                                        Manage Lease
+                                    </button>
+                                )}
 
                                 <button className="btn btn-danger" onClick={() => handleDelete(property._id)}>
                                     Delete
