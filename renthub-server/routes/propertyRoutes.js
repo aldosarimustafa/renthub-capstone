@@ -10,47 +10,46 @@ const router = express.Router();
 router.get("/", async (req, res) => {
     try {
         let user = null;
+
         const authHeader = req.headers.authorization;
 
-        if (authHeader?.startsWith("Bearer ")) {
+        if (authHeader && authHeader.startsWith("Bearer ")) {
             try {
                 const token = authHeader.split(" ")[1];
                 user = jwt.verify(token, process.env.JWT_SECRET);
-            } catch {
+            } catch (error) {
                 user = null;
             }
         }
 
+        let query = { status: "Available" };
+
         if (user?.role === "Administrator") {
-            const properties = await Property.find().populate(
-                "managerId",
-                "fullName email"
-            );
+            query = {};
+        }
 
-            const activeLeases = await Lease.find({
-                leaseStatus: "Active",
-            }).populate("tenantId", "fullName email");
+        const properties = await Property.find(query).populate(
+            "managerId",
+            "fullName email"
+        );
 
-            const propertiesWithOccupants = properties.map((property) => {
-                const lease = activeLeases.find(
-                    (lease) =>
-                        lease.propertyId.toString() === property._id.toString()
-                );
+        const propertiesWithOccupants = await Promise.all(
+            properties.map(async (property) => {
+                const activeLease = await Lease.findOne({
+                    propertyId: property._id,
+                    leaseStatus: "Active",
+                }).populate("tenantId", "fullName email");
 
                 return {
                     ...property.toObject(),
-                    occupiedBy: lease ? lease.tenantId : null,
+                    occupiedBy: activeLease?.tenantId || null,
+                    leaseStartDate: activeLease?.startDate || null,
+                    leaseEndDate: activeLease?.endDate || null,
                 };
-            });
+            })
+        );
 
-            return res.json(propertiesWithOccupants);
-        }
-
-        const availableProperties = await Property.find({
-            status: "Available",
-        }).populate("managerId", "fullName email");
-
-        res.json(availableProperties);
+        res.json(propertiesWithOccupants);
     } catch (error) {
         res.status(500).json({
             message: "Failed to fetch properties",
@@ -91,7 +90,9 @@ router.get("/:id", async (req, res) => {
         );
 
         if (!property) {
-            return res.status(404).json({ message: "Property not found" });
+            return res.status(404).json({
+                message: "Property not found",
+            });
         }
 
         res.json(property);
@@ -112,11 +113,16 @@ router.put(
             const property = await Property.findByIdAndUpdate(
                 req.params.id,
                 req.body,
-                { new: true, runValidators: true }
+                {
+                    new: true,
+                    runValidators: true,
+                }
             );
 
             if (!property) {
-                return res.status(404).json({ message: "Property not found" });
+                return res.status(404).json({
+                    message: "Property not found",
+                });
             }
 
             res.json({
@@ -141,10 +147,14 @@ router.delete(
             const property = await Property.findByIdAndDelete(req.params.id);
 
             if (!property) {
-                return res.status(404).json({ message: "Property not found" });
+                return res.status(404).json({
+                    message: "Property not found",
+                });
             }
 
-            res.json({ message: "Property deleted successfully" });
+            res.json({
+                message: "Property deleted successfully",
+            });
         } catch (error) {
             res.status(500).json({
                 message: "Failed to delete property",

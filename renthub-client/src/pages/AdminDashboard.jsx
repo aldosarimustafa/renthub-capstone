@@ -249,25 +249,70 @@ function AdminDashboard() {
                         <div className={property.imageUrl ? "col-md-8" : "col-md-12"}>
                             <div className="card-body">
                                 <h4>{property.title}</h4>
+
                                 <p>{property.description}</p>
+
                                 <p>
                                     {property.address}, {property.city}, {property.state} {property.zipCode}
                                 </p>
+
                                 <p>
                                     <strong>${property.rentAmount}/month</strong>
                                 </p>
+
                                 <p>
                                     {property.bedrooms} Bed • {property.bathrooms} Bath
                                 </p>
+
                                 <p>
-                                    <strong>Status:</strong> {property.status}
+                                    <strong>Status:</strong>{" "}
+                                    <span
+                                        className={
+                                            property.status === "Occupied"
+                                                ? "badge bg-danger"
+                                                : property.status === "Maintenance"
+                                                    ? "badge bg-warning text-dark"
+                                                    : "badge bg-success"
+                                        }
+                                    >
+                                        {property.status}
+                                    </span>
                                 </p>
 
-                                {property.status === "Occupied" && property.occupiedBy && (
-                                    <p>
-                                        <strong>Occupied By:</strong>{" "}
-                                        {property.occupiedBy.fullName} ({property.occupiedBy.email})
-                                    </p>
+                                {property.status === "Occupied" && (
+                                    <div className="alert alert-warning mt-3">
+                                        <h6>Occupancy Information</h6>
+
+                                        {property.occupiedBy ? (
+                                            <>
+                                                <p>
+                                                    <strong>Tenant:</strong>{" "}
+                                                    {property.occupiedBy.fullName}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Email:</strong>{" "}
+                                                    {property.occupiedBy.email}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Lease Start:</strong>{" "}
+                                                    {property.leaseStartDate
+                                                        ? new Date(property.leaseStartDate).toLocaleDateString()
+                                                        : "N/A"}
+                                                </p>
+
+                                                <p>
+                                                    <strong>Lease End:</strong>{" "}
+                                                    {property.leaseEndDate
+                                                        ? new Date(property.leaseEndDate).toLocaleDateString()
+                                                        : "N/A"}
+                                                </p>
+                                            </>
+                                        ) : (
+                                            <p>No active lease found.</p>
+                                        )}
+                                    </div>
                                 )}
 
                                 <button className="btn btn-warning me-2" onClick={() => handleEdit(property)}>
