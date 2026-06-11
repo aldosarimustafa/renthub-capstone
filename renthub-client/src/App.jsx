@@ -10,6 +10,9 @@ import Reports from "./pages/Reports";
 import Maintenance from "./pages/Maintenance";
 import Payments from "./pages/Payments";
 import Leases from "./pages/Leases";
+import AdminDashboard from "./pages/AdminDashboard";
+import Applications from "./pages/Applications";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 function App() {
   return (
@@ -36,6 +39,17 @@ function App() {
         <Route path="/payments" element={<Payments />} />
 
         <Route path="/leases" element={<Leases />} />
+
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute role="Administrator">
+              <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route path="/applications" element={<Applications />} />
       </Routes>
     </BrowserRouter>
   );
