@@ -4,6 +4,9 @@ import api from "../api/api";
 
 function PropertyDetails() {
     const { id } = useParams();
+    const user = JSON.parse(localStorage.getItem("user"));
+    const role = user?.role;
+
     const [property, setProperty] = useState(null);
     const [monthlyIncome, setMonthlyIncome] = useState("");
     const [employmentStatus, setEmploymentStatus] = useState("");
@@ -40,7 +43,20 @@ function PropertyDetails() {
     }
 
     return (
-        <div>
+        <div className="container mt-4">
+            {property.imageUrl && (
+                <img
+                    src={property.imageUrl}
+                    alt={property.title}
+                    className="img-fluid rounded mb-4"
+                    style={{
+                        maxHeight: "400px",
+                        width: "100%",
+                        objectFit: "cover",
+                    }}
+                />
+            )}
+
             <h1>{property.title}</h1>
             <p>{property.description}</p>
             <p>{property.address}</p>
@@ -52,43 +68,57 @@ function PropertyDetails() {
             <p>{property.bathrooms} bathrooms</p>
             <p>Status: {property.status}</p>
 
-            <h2>Apply for this property</h2>
+            {role === "Tenant" && (
+                <div className="card mt-4 shadow-sm">
+                    <div className="card-body">
+                        <h2>Apply for this property</h2>
 
-            <form onSubmit={handleApply}>
-                <div>
-                    <label>Monthly Income</label>
-                    <br />
-                    <input
-                        type="number"
-                        value={monthlyIncome}
-                        onChange={(e) => setMonthlyIncome(e.target.value)}
-                        required
-                    />
+                        <form onSubmit={handleApply}>
+                            <div className="mb-3">
+                                <label className="form-label">Monthly Income</label>
+                                <input
+                                    className="form-control"
+                                    type="number"
+                                    value={monthlyIncome}
+                                    onChange={(e) => setMonthlyIncome(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="form-label">Employment Status</label>
+                                <input
+                                    className="form-control"
+                                    value={employmentStatus}
+                                    onChange={(e) => setEmploymentStatus(e.target.value)}
+                                    required
+                                />
+                            </div>
+
+                            <div className="mb-3">
+                                <label className="form-label">Notes</label>
+                                <textarea
+                                    className="form-control"
+                                    value={notes}
+                                    onChange={(e) => setNotes(e.target.value)}
+                                />
+                            </div>
+
+                            <button className="btn btn-primary" type="submit">
+                                Apply Now
+                            </button>
+                        </form>
+                    </div>
                 </div>
+            )}
 
-                <div>
-                    <label>Employment Status</label>
-                    <br />
-                    <input
-                        value={employmentStatus}
-                        onChange={(e) => setEmploymentStatus(e.target.value)}
-                        required
-                    />
+            {role === "Administrator" && (
+                <div className="alert alert-info mt-4">
+                    Administrator view: applications are managed from the Applications page.
                 </div>
+            )}
 
-                <div>
-                    <label>Notes</label>
-                    <br />
-                    <textarea
-                        value={notes}
-                        onChange={(e) => setNotes(e.target.value)}
-                    />
-                </div>
-
-                <button type="submit">Apply Now</button>
-            </form>
-
-            <p>{message}</p>
+            {message && <div className="alert alert-info mt-3">{message}</div>}
         </div>
     );
 }
