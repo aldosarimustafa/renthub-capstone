@@ -36,7 +36,13 @@ router.get("/", authMiddleware, async (req, res) => {
 
         const payments = await Payment.find(query)
             .populate("tenantId", "fullName email")
-            .populate("leaseId");
+            .populate({
+                path: "leaseId",
+                populate: {
+                    path: "propertyId",
+                    select: "title address city state",
+                },
+            });
 
         res.json(payments);
     } catch (error) {
