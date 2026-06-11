@@ -13,6 +13,7 @@ import Leases from "./pages/Leases";
 import AdminDashboard from "./pages/AdminDashboard";
 import Applications from "./pages/Applications";
 import ProtectedRoute from "./components/ProtectedRoute";
+import TenantDashboard from "./pages/TenantDashboard";
 
 function App() {
   return (
@@ -45,6 +46,15 @@ function App() {
           element={
             <ProtectedRoute role="Administrator">
               <AdminDashboard />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/tenant-dashboard"
+          element={
+            <ProtectedRoute role="Tenant">
+              <TenantDashboard />
             </ProtectedRoute>
           }
         />

@@ -66,6 +66,10 @@ function Navbar() {
                         <Link className="nav-link" to="/applications">
                             Applications
                         </Link>
+
+                        <Link className="nav-link" to="/tenant-dashboard">
+                            Dashboard
+                        </Link>
                     </>
                 )}
 
