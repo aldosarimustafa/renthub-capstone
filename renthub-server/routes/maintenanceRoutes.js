@@ -1,6 +1,7 @@
 const express = require("express");
 const MaintenanceRequest = require("../models/MaintenanceRequest");
 const authMiddleware = require("../middleware/authMiddleware");
+const roleMiddleware = require("../middleware/roleMiddleware");
 
 const router = express.Router();
 
@@ -28,7 +29,13 @@ router.post("/", authMiddleware, async (req, res) => {
 
 router.get("/", authMiddleware, async (req, res) => {
     try {
-        const requests = await MaintenanceRequest.find()
+        let query = {};
+
+        if (req.user.role !== "Administrator") {
+            query.tenantId = req.user.id;
+        }
+
+        const requests = await MaintenanceRequest.find(query)
             .populate("tenantId", "fullName email")
             .populate("propertyId", "title address city state");
 
@@ -41,28 +48,35 @@ router.get("/", authMiddleware, async (req, res) => {
     }
 });
 
-router.put("/:id", authMiddleware, async (req, res) => {
-    try {
-        const request = await MaintenanceRequest.findByIdAndUpdate(
-            req.params.id,
-            req.body,
-            { new: true, runValidators: true }
-        );
+router.put(
+    "/:id",
+    authMiddleware,
+    roleMiddleware("Administrator"),
+    async (req, res) => {
+        try {
+            const request = await MaintenanceRequest.findByIdAndUpdate(
+                req.params.id,
+                req.body,
+                { new: true, runValidators: true }
+            );
 
-        if (!request) {
-            return res.status(404).json({ message: "Maintenance request not found" });
+            if (!request) {
+                return res.status(404).json({
+                    message: "Maintenance request not found",
+                });
+            }
+
+            res.json({
+                message: "Maintenance request updated successfully",
+                request,
+            });
+        } catch (error) {
+            res.status(500).json({
+                message: "Failed to update maintenance request",
+                error: error.message,
+            });
         }
-
-        res.json({
-            message: "Maintenance request updated successfully",
-            request,
-        });
-    } catch (error) {
-        res.status(500).json({
-            message: "Failed to update maintenance request",
-            error: error.message,
-        });
     }
-});
+);
 
 module.exports = router;
